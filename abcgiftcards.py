@@ -7,6 +7,7 @@ import datetime
 import re
 import csv
 
+# Fetch data from abcgiftcards website
 
 class Fat_Wallet(BaseSpider):
     # name of spider used to run the script
