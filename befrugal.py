@@ -8,6 +8,8 @@ import re
 import csv
 from scrapy.conf import settings
 
+# Scrapes data from befrugal using scrapy framework
+
 #settings.overrides['CONCURRENT_REQUESTS_PER_SPIDER'] = 1
 #settings.overrides['CONCURRENT_REQUESTS_PER_DOMAIN'] = 1
 settings.overrides['CONCURRENT_REQUESTS_PER_IP'] = 1
