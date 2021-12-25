@@ -1,3 +1,7 @@
+"""
+author: Zahin Azher 
+"""
+
 from scrapy.selector import Selector
 from scrapy.spider import BaseSpider
 from scrapy.http import Request
