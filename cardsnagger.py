@@ -7,6 +7,10 @@ import datetime
 import re
 import csv
 
+"""
+@author: Zahin
+"""
+
 from scrapy.conf import settings
 #settings.overrides['CONCURRENT_REQUESTS_PER_SPIDER'] = 1
 #settings.overrides['SCHEDULER_MEMORY_QUEUE'] = 'scrapy.squeue.FifoMemoryQueue'
