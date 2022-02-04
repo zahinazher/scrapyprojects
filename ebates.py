@@ -8,6 +8,9 @@ import logging
 import re
 import csv
 
+"""
+@author: Zahin
+"""
 
 class Ebates(BaseSpider):
     name = "ebates"
