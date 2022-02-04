@@ -11,6 +11,10 @@ from priceplow.utils import cached_property, ignored
 
 from scrapy.conf import settings
 
+"""
+@author: Zahin
+"""
+
 """settings.overrides['CONCURRENT_REQUESTS_PER_SPIDER'] = 1
 #settings.overrides['CONCURRENT_REQUESTS_PER_DOMAIN'] = 1
 settings.overrides['CONCURRENT_REQUESTS_PER_IP'] = 1
