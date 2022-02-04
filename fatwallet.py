@@ -8,6 +8,9 @@ import logging
 import re
 import csv
 
+"""
+@author: zahin
+"""
 
 class Fat_Wallet(BaseSpider):
     name = "wallet"
