@@ -8,6 +8,10 @@ import re
 import csv
 from scrapy.conf import settings
 
+"""
+@author: zahin
+"""
+
 #settings.overrides['CONCURRENT_REQUESTS_PER_DOMAIN'] = 1
 #settings.overrides['SCHEDULER_MEMORY_QUEUE'] = 'scrapy.squeue.FifoMemoryQueue'
 
