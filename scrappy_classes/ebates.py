@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import time
@@ -12,7 +12,7 @@ import csv
 @author: Zahin
 """
 
-class Ebates(BaseSpider):
+class Ebates(Spider):
     name = "ebates"
     allowed_domains = ["ebates.com"]
     start_urls = [

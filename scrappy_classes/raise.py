@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import time
@@ -11,7 +11,7 @@ from scrapy.conf import settings
 #settings.overrides['CONCURRENT_REQUESTS_PER_SPIDER'] = 1
 #settings.overrides['SCHEDULER_MEMORY_QUEUE'] = 'scrapy.squeue.FifoMemoryQueue'
 
-class Fat_Wallet(BaseSpider):
+class Fat_Wallet(Spider):
     # name of spider used to run the script
     name = "raise"
     allowed_domains = ["raise.com"]

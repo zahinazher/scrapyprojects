@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import time
@@ -27,7 +27,7 @@ settings.overrides['WEBSERVICE_ENABLED'] = True
 
 ###############################################
 
-class Befrugal(BaseSpider):
+class Befrugal(Spider):
     name = "befrugal"
     allowed_domains = ["befrugal.com"]
     start_urls = [

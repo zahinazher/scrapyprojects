@@ -1,5 +1,9 @@
+"""
+@author: Zahin Azher
+"""
+
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import time
@@ -8,34 +12,33 @@ import re
 import csv
 
 
-class Fat_Wallet(BaseSpider):
+class Fat_Wallet(Spider):
     # name of spider used to run the script
-    name = "rescue"
-    allowed_domains = ["giftcardrescue.com"]
+    name = "cardpool"
+    allowed_domains = ["cardpool.com"]
     # required urls list
     start_urls = [
-        "http://www.giftcardrescue.com/buy-gift-cards"
+        "http://www.cardpool.com/buy-gift-cards"
     ]
 
-    op1="./../Results/rescue.csv"
+    op1="./../Results/cardpool.csv"
     opfile = csv.writer(open(op1, 'w'), delimiter=',')
     opfile.writerow(["Store Name","Cash Back", "Url", "Category", ""])
 
     def parse(self,response):
       selec = Selector(response)
 
-      #f = open('resp.txt' , 'w')
-      #f.write(response.body)
+      f = open('resp.txt' , 'w')
+      f.write(response.body)
 
       #tag_tr_all = selec.xpath('//tr[@class="spon body-content"]|\
       #                          //tr[@class=" body-content"]').extract()
-      tag_div_all = selec.xpath('//div[@class="tab-pane"]//li').extract()
+      tag_div_all = selec.xpath('//table[@class="bottom merchants_grid"]//td').extract()
 
       count = 0
       for tag_tr in tag_div_all:
 
         tag_tr =  tag_tr.encode('utf-8', 'ignore').strip()
-        #print tag_tr
 
         store_name = '' ; link = ''
         if re.search(r"href=\".*?</a>",tag_tr,re.I|re.S):
@@ -43,22 +46,30 @@ class Fat_Wallet(BaseSpider):
 
           link = re.search(r"\".*?\"",store_name,re.I|re.S).group()
           link = re.sub(r'\"',"",link,re.I)
-          link = "http://www.giftcardrescue.com" + link
+          link = "http://www.cardpool.com" + link
           #print link
 
-          store_name = re.search(r"title=\".*?\"",store_name,re.I|re.S).group()
-          store_name = re.search(r"\".*?\"",store_name,re.I|re.S).group()
-          store_name = re.sub(r'&amp;',"",re.sub(r'\(Not iTunes\)',"",store_name,re.I))
-          store_name = re.sub(r'\"',"",re.sub(r'\"',"",store_name,re.I))
+          store_name = re.search(r"class=\"merchant_link_name_text\".*?<",store_name,re.I|re.S).group()
+          stock = re.search(r">.*?<",store_name,re.I|re.S).group()
+          stock = re.search(r"\(.*?\)",stock,re.I|re.S).group()
+          stock = re.sub(r'\(',"",re.sub(r'\)',"",stock,re.I))
+
+          store_name = re.search(r">.*?\(",store_name,re.I|re.S).group()
+          store_name = re.sub(r'&amp;',"&",re.sub(r'Gift Cards',"",store_name,re.I))
+          store_name = re.sub(r'\(',"",store_name,re.I)
+          store_name = re.sub(r'>',"",re.sub(r'<',"",store_name,re.I))
           store_name = re.sub(r'^ ',"",re.sub(r' $',"",store_name,re.I))
+          store_name = re.sub(r'\"',"",re.sub(r'\"',"",store_name,re.I))
           #print store_name
 
 
         cash_back = '' ; category = ''
-        if re.search(r"<span>.*?<",tag_tr,re.I|re.S):
-          cash_back = re.findall(r"<span>.*?<",tag_tr,re.I|re.S)[0]
+        if re.search(r"class=\"merchant_discount\">.*?<",tag_tr,re.I|re.S):
+          cash_back = re.findall(r"class=\"merchant_discount\">.*?<",tag_tr,re.I|re.S)[0]
           cash_back = re.search(r">.*?<",cash_back,re.I|re.S).group()
           cash_back = re.sub(r'>',"",re.sub(r'<',"",cash_back,re.I))
+          cash_back = re.sub(r'Off',"",cash_back,re.I)
+          cash_back = re.sub(r' $',"",cash_back,re.I)
           #print cash_back
 
 
@@ -71,6 +82,6 @@ class Fat_Wallet(BaseSpider):
           category = "unknown"
 
         #------------ check for out of stock store names
-        #if re.search(r"class=\"count\"",tag_tr,re.I):
-        self.opfile.writerow([store_name,cash_back,link,category])
+        if str(stock) != "0":
+          self.opfile.writerow([store_name,cash_back,link,category])
 

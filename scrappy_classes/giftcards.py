@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import time
@@ -8,7 +8,7 @@ import re
 import csv
 
 
-class Fat_Wallet(BaseSpider):
+class Fat_Wallet(Spider):
     # name of spider used to run the script
     name = "giftcards"
     allowed_domains = ["giftcards.com"]
