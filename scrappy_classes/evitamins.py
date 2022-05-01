@@ -1,5 +1,5 @@
 from scrapy.selector import HtmlXPathSelector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import re
@@ -23,7 +23,7 @@ settings.overrides['SCHEDULER_MEMORY_QUEUE'] = 'scrapy.squeue.FifoMemoryQueue'
 settings.overrides['WEBSERVICE_ENABLED'] = True"""
 
 
-class E_vitamins(BaseSpider):
+class E_vitamins(Spider):
   name = "evitamins"
   store_id = 14
   allowed_domains = ["evitamins.com"]

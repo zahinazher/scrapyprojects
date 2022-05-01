@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 from scrapy.http.cookies import CookieJar
@@ -27,7 +27,7 @@ op1="pentair.csv"
 opfile = csv.writer(open(op1, 'w'), delimiter=',')
 opfile.writerow(["JOB TITLE","JOB ID","JOB LOCATION","JOB SUMMARY","JOB REQUIREMENTS",""])
 
-class Pentair_spider(BaseSpider):
+class Pentair_spider(Spider):
   name = "pentair"
   allowed_domains = ["careers.pentair.com"]
   start_urls = [

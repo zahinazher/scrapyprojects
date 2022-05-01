@@ -6,7 +6,7 @@
 from scrapy.selector import Selector
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import Rule
-from scrapyproduct.spiderlib import SSBaseSpider
+from scrapyproduct.spiderlib import SSSpider
 from scrapyproduct.items import ProductItem, SizeItem
 from scrapy.http.request import Request
 from scrapy.http import FormRequest
@@ -34,7 +34,7 @@ import urlparse
 import urllib
 
 # This is the base class of Intermixonline crawler
-class Intermixonline(SSBaseSpider):
+class Intermixonline(SSSpider):
 
     # name of spider used to run the script
     name = "intermix"

@@ -3,7 +3,7 @@ author: Zahin Azher
 """
 
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 from scrapy.http.cookies import CookieJar
@@ -17,7 +17,7 @@ op1="output.csv"
 opfile1 = csv.writer(open(op1, 'w'), delimiter=',')
 opfile1.writerow(["Job Title","Description"])
 
-class Brassring(BaseSpider):
+class Brassring(Spider):
     name = "brass"
     allowed_domains = ["sjobs.brassring.com"]
     start_urls = [

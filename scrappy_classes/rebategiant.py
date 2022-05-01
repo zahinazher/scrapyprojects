@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import re, os
@@ -26,7 +26,7 @@ settings.overrides['SCHEDULER_MEMORY_QUEUE'] = 'scrapy.squeue.FifoMemoryQueue'
 
 ###############################################
 
-class Rebate_giant(BaseSpider):
+class Rebate_giant(Spider):
     name = "rebategiant"
     allowed_domains = ["rebategiant.com"]
     start_urls = [

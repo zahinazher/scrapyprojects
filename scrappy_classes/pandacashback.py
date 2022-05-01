@@ -1,5 +1,5 @@
 from scrapy.selector import Selector
-from scrapy.spider import BaseSpider
+from scrapy import Spider
 from scrapy.http import Request
 from scrapy.http import FormRequest
 import time
@@ -27,7 +27,7 @@ settings.overrides['SCHEDULER_MEMORY_QUEUE'] = 'scrapy.squeue.FifoMemoryQueue'
 settings.overrides['WEBSERVICE_ENABLED'] = True
 
 
-class PandaCashBack(BaseSpider):
+class PandaCashBack(Spider):
     name = "panda"
     allowed_domains = ["pandacashback.com"]
     start_urls = [
